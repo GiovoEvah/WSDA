@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container, .container2 {
+    max-width: 600px;
+    width: 90%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background-color: #fff;
+}
+
+.container2 {
+    background-color: #7dff6c52;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.form-group {
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 200px;
+    resize: none;
+}
+
+.button-normal, .indietro-button {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 90%;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.button-normal {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.button-normal:hover {
+    background-color: #3f9143;
+}
+
+.indietro-button {
+    background-color: #808080;
+    color: white;
+}
+
+.indietro-button:hover {
+    background-color: #525252;
+}
+
+p {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+}
+
+a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.barraCommento {
+    width: 90%;
+}
+
+.listaCommenti {
+    text-align: left;
+}

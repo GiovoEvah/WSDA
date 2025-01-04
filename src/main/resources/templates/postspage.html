@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+    <link rel="stylesheet" href="/styles/postspage.css">
+    <link rel="stylesheet" href="/styles/common.css">
+</head>
+<body>
+<h1 style="text-align: center; font-size: 24px; margin-top: 20px;">Tutti i post</h1>
+
+<ul class="container" id="postContainer"></ul>
+
+<div class="button-container">
+    <button class="add-button" id="openModalButton">Aggiungi</button>
+</div>
+
+<!-- Modale per la creazione di un post -->
+<div class="modal" id="postModal">
+    <div class="modal-content">
+        <button class="close-button" id="closeModalButton">&times;</button>
+        <h2>Crea un nuovo post</h2>
+        <form id="createPostForm" action="/createPost" method="POST">
+            <label for="postContent">Contenuto:</label>
+            <textarea id="postContent" name="postContent" rows="4" required></textarea>
+            <br>
+            <input hidden id="idUtente" value="0" name="idUtente">
+            <input hidden id="emailUtente" value="ADMIN" name="emailUtente">
+            <input id="pubblica-post-button" type="submit" value="Pubblica">
+        </form>
+    </div>
+</div>
+
+<!-- Modale per dettagli del post -->
+<div id="postDetailsModal" class="modal">
+    <div class="modal-content">
+        <button class="close-button" id="closePostDetailsModal">&times;</button>
+        <h2 id="postDetailsTitle">Dettagli del Post</h2>
+        <p id="postDetailsContent"></p>
+        <h3>Commenti</h3>
+        <div id="commentsContainer">
+            <ul id="postCommentsList"></ul>
+            <button id="loadMoreComments" class="load-more-button">Altri...</button>
+        </div>
+
+        <form id="addCommentForm" action="/addComment" method="POST">
+            <textarea id="utenteId" name="utenteId" hidden>0</textarea>
+            <textarea id="postId" name="postId" hidden></textarea>
+            <textarea id="newComment" name="newComment" placeholder="Scrivi un commento..." required></textarea>
+            <input id="pubblica-commento-button" type="submit" value="Aggiungi Commento">
+        </form>
+    </div>
+</div>
+
+<script src="/scripts/postspage.js" defer></script>
+</body>
+</html>

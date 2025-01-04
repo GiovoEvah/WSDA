@@ -1,0 +1,278 @@
+/* Corpo principale della pagina */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    padding: 0;
+}
+
+/* Contenitore principale */
+.container {
+    flex: 1;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Aggiunto per lo scrolling indipendente del contenitore */
+    max-height: 85vh; /* Limita l'altezza del contenitore */
+}
+
+/* Titolo principale */
+h1 {
+    color: #333;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Pulsanti principali */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-block;
+    text-align: center;
+}
+
+#pubblica-commento-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-block;
+    text-align: center;
+}
+
+.load-more-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.load-more-button:hover {
+    background-color: #0056b3;
+}
+
+.load-more-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+    color: #aaa;
+}
+
+#commentsContainer {
+    max-height: 200px; /* Imposta un'altezza massima per l'area commenti */
+    overflow-y: auto; /* Abilita lo scrolling verticale */
+    margin-bottom: 20px; /* Aggiungi uno spazio sotto il contenitore */
+    border: 1px solid #ddd; /* Opzionale: aggiungi un bordo per evidenziare l'area */
+    padding: 10px; /* Spazio interno per i commenti */
+    border-radius: 4px; /* Arrotonda gli angoli */
+    background-color: #f9f9f9; /* Sfondo per l'area commenti */
+}
+
+#pubblica-post-button{
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-block;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Stile per la modale */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0; /* Da modificare in visibile con JavaScript */
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    position: relative;
+    overflow-y: auto; /* Per lo scorrimento verticale */
+    max-height: 90vh; /* Limite altezza modale */
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Textarea stile */
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    font-size: 16px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+/* Bottone invio */
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+/* Bottone di chiusura */
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    background: none;
+    border: none;
+    transition: color 0.3s;
+}
+
+.close-button:hover {
+    color: #FF0000;
+}
+
+/* Contenitore dei post */
+#postContainer {
+    list-style: none; /* Rimuove i pallini dalla lista */
+    padding: 0; /* Elimina il padding predefinito della lista */
+    margin: 0; /* Elimina il margine predefinito della lista */
+    max-height: 85vh; /* Limita l'altezza visibile del contenitore */
+    overflow-y: auto; /* Aggiunto per lo scrolling del contenitore */
+}
+
+#postContainer .post {
+    margin-bottom: 20px; /* Spaziatura tra i post */
+    border: 1px solid #ddd; /* Aggiunge un bordo leggero */
+    border-radius: 5px; /* Arrotonda gli angoli */
+    padding: 15px;
+    background-color: #f9f9f9; /* Colore di sfondo */
+}
+
+/* Header del post */
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Nome dell'autore */
+.post-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Timestamp */
+.post-header .time {
+    font-size: 14px;
+    color: #888;
+    margin-left: auto;
+    text-align: right;
+}
+
+/* Contenuto del post */
+.post p {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Bottone Visualizza */
+.post .view-button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.post .view-button:hover {
+    background-color: #0056b3;
+}
+
+#postDetailsModal .modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+#postCommentsList {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+#postCommentsList li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}

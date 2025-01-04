@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<posts xmlns:th="http://www.thymeleaf.org">
+    <post th:each="post : ${posts}">
+        <id th:text="${post.id}"></id>
+        <contenuto th:text="${post.contenuto}"></contenuto>
+        <creatoIl th:text="${#dates.format(post.creatoIl, 'yyyy-MM-dd')}"></creatoIl>
+
+        <!-- Dettagli Autore -->
+        <autore>
+            <nome th:text="${post.utente.nome}"></nome>
+            <cognome th:text="${post.utente.cognome}"></cognome>
+        </autore>
+
+        <!-- Dettagli Commenti -->
+        <commenti>
+            <commento th:each="comment : ${post.commenti}">
+                <testo th:text="${comment.testo}"></testo>
+                <creatoIl th:text="${#dates.format(comment.creatoIl, 'yyyy-MM-dd HH:mm:ss')}"></creatoIl>
+                <autore>
+                    <nome th:text="${comment.utente.nome}"></nome>
+                    <cognome th:text="${comment.utente.cognome}"></cognome>
+                </autore>
+            </commento>
+        </commenti>
+
+    </post>
+</posts>
