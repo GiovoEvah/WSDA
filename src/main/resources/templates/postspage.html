@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="/styles/common.css">
 </head>
 <body>
+<div class="header-container">
+    <p class="username" id="username" th:text="${username}"></p>
+    <button class="logout-button" onclick="window.location.href='/logout'">Logout</button>
+</div>
 <h1 style="text-align: center; font-size: 24px; margin-top: 20px;">Tutti i post</h1>
 
 <ul class="container" id="postContainer"></ul>

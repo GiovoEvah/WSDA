@@ -7,6 +7,7 @@
 
         <!-- Dettagli Autore -->
         <autore>
+            <email th:text="${post.utente.email}"></email>
             <nome th:text="${post.utente.nome}"></nome>
             <cognome th:text="${post.utente.cognome}"></cognome>
         </autore>
@@ -17,6 +18,7 @@
                 <testo th:text="${comment.testo}"></testo>
                 <creatoIl th:text="${#dates.format(comment.creatoIl, 'yyyy-MM-dd HH:mm:ss')}"></creatoIl>
                 <autore>
+                    <email th:text="${comment.utente.email}"></email>
                     <nome th:text="${comment.utente.nome}"></nome>
                     <cognome th:text="${comment.utente.cognome}"></cognome>
                 </autore>

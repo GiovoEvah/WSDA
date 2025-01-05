@@ -25,12 +25,11 @@ function displayPosts(xmlDoc) {
 
     for (let post of posts) {
         const id = post.getElementsByTagName("id")[0].textContent;
-        const autoreNome = post.getElementsByTagName("nome")[0].textContent;
-        const autoreCognome = post.getElementsByTagName("cognome")[0].textContent;
+        const autoreEmail = post.getElementsByTagName("email")[0].textContent;
         const dataOra = post.getElementsByTagName("creatoIl")[0].textContent;
         const testo = post.getElementsByTagName("contenuto")[0].textContent;
 
-        const autore = `${autoreNome} ${autoreCognome}`;
+        const autore = `${autoreEmail}`;
         const timeAgo = calculateTimeAgo(dataOra);
 
         const postElement = document.createElement("li");
@@ -61,7 +60,7 @@ function redirectToPostPage(post) {
     // Dati del post
     offset = 1;
     const postId = post.getElementsByTagName("id")[0].textContent;
-    const postTitle = `${post.getElementsByTagName("nome")[0].textContent} ${post.getElementsByTagName("cognome")[0].textContent}`;
+    const postTitle = `${post.getElementsByTagName("email")[0].textContent}`;
     const postContent = post.getElementsByTagName("contenuto")[0].textContent;
     const comments = post.getElementsByTagName("commento");
 
@@ -75,7 +74,7 @@ function redirectToPostPage(post) {
     const commentsList = document.getElementById("postCommentsList");
     commentsList.innerHTML = ""; // Svuota la lista dei commenti
     Array.from(comments).forEach((comment) => {
-        const commentUser = `${comment.getElementsByTagName("nome")[0].textContent} ${comment.getElementsByTagName("cognome")[0].textContent}`;
+        const commentUser = `${comment.getElementsByTagName("email")[0].textContent}`;
         const commentContent = comment.getElementsByTagName("testo")[0].textContent;
 
         const commentElement = document.createElement("li");
@@ -175,7 +174,7 @@ function loadMoreComments(offsetToApply, currentPostId){
                     let commentLi = document.createElement('li');
                     commentLi.classList.add('comment');
                     commentLi.classList.add('loadedComment');
-                    commentLi.innerHTML = `${comment.utente.nome} ${comment.utente.cognome} : ${comment.testo}`;
+                    commentLi.innerHTML = `${comment.utente.email} : ${comment.testo}`;
                     modalComments.appendChild(commentLi);
                 });
                 console.log(newComments);
