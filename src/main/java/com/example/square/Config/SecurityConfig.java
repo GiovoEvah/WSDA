@@ -1,5 +1,7 @@
 package com.example.square.Config;
 
+import com.example.square.Repository.UtenteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +12,9 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+
+    @Autowired
+    private UtenteRepository utenteRepository;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -39,7 +44,8 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/postspage", true)
                         .failureUrl("/error")
                         .permitAll()
-                ).logout(logout -> logout
+                )
+                .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true)
