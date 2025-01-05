@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     loadPosts();
     setupModalEvents();
+    const username = document.getElementById("username").innerHTML;
+    document.getElementById("emailUtente").value = username;
+    document.getElementById("emailUtenteCommento").innerHTML = username;
 
     // Nascondere il modale all'avvio della pagina
     const modal = document.getElementById("postModal");

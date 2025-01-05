@@ -1,5 +1,6 @@
 package com.example.square.Controller;
 
+import com.example.square.Repository.UtenteRepository;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.context.Context;
 import com.example.square.Model.Post;
@@ -26,6 +27,9 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private UtenteRepository utenteRepository;
+
     @GetMapping("/export/xml")
     public ResponseEntity<String> exportPostsToXml(Model model) {
         // Recupera tutti i post
@@ -48,9 +52,9 @@ public class PostController {
     }
 
     @PostMapping("/createPost")
-    public String createPost(@RequestParam String idUtente, @RequestParam String postContent) {
+    public String createPost(@RequestParam String emailUtente, @RequestParam String postContent) {
         try {
-            postService.savePost(idUtente, postContent);
+            postService.savePost(emailUtente, postContent);
             return "redirect:/";
         } catch (Exception e) {
             System.out.println(e + "Error creating post");

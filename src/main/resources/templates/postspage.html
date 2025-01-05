@@ -29,7 +29,6 @@
             <label for="postContent">Contenuto:</label>
             <textarea id="postContent" name="postContent" rows="4" required></textarea>
             <br>
-            <input hidden id="idUtente" value="0" name="idUtente">
             <input hidden id="emailUtente" value="ADMIN" name="emailUtente">
             <input id="pubblica-post-button" type="submit" value="Pubblica">
         </form>
@@ -49,7 +48,7 @@
         </div>
 
         <form id="addCommentForm" action="/addComment" method="POST">
-            <textarea id="utenteId" name="utenteId" hidden>0</textarea>
+            <textarea id="emailUtenteCommento" name="emailUtenteCommento" hidden>0</textarea>
             <textarea id="postId" name="postId" hidden></textarea>
             <textarea id="newComment" name="newComment" placeholder="Scrivi un commento..." required></textarea>
             <input id="pubblica-commento-button" type="submit" value="Aggiungi Commento">

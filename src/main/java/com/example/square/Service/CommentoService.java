@@ -10,6 +10,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -39,9 +40,14 @@ public class CommentoService {
         return commentoRepository.findAll();
     }
 
-    public void addCommento(int idUtente, int postId, String contenuto) {
+    public void addCommento(String emailUtenteCommento, int postId, String contenuto) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post non trovato"));
-        Utente utente = utenteRepository.findById(idUtente).orElseThrow(() -> new EntityNotFoundException("Utente non trovato"));
+        Utente utente = null;
+        try {
+            utente = utenteRepository.findByEmail(emailUtenteCommento);
+        } catch (UsernameNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         Commento commento = new Commento();
         commento.setTesto(contenuto);
         commento.setPost(post);

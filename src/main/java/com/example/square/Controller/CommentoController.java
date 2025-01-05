@@ -16,9 +16,9 @@ public class CommentoController {
     private CommentoService commentoService;
 
     @PostMapping("/addComment")
-    public String createComment(@RequestParam int utenteId, @RequestParam int postId, @RequestParam String newComment) {
+    public String createComment(@RequestParam String emailUtenteCommento, @RequestParam int postId, @RequestParam String newComment) {
         try {
-            commentoService.addCommento(utenteId, postId, newComment);
+            commentoService.addCommento(emailUtenteCommento, postId, newComment);
             return "redirect:/";
         } catch (Exception e) {
             return "redirect:/";

@@ -60,15 +60,9 @@ public class PostService {
         return postsWithComments;
     }
 
-    public void savePost(String idUtente, String testo) {
+    public void savePost(String username, String testo) {
         Post post = new Post();
-        int id = 0;
-        try {
-            id = Integer.parseInt(idUtente);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException(e);
-        }
-        post.setUtente(utenteRepository.findByid(id));
+        post.setUtente(utenteRepository.findByEmail(username));
         post.setCreatoIl(new Date());
         post.setContenuto(testo);
         postRepository.save(post);
