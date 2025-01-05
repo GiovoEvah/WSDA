@@ -38,6 +38,11 @@ public class SecurityController {
                         .defaultSuccessUrl("/postspage", true) // Reindirizza dopo un login riuscito
                         .failureUrl("/login?error=true") // Reindirizza in caso di errore
                         .permitAll()
+                ).logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
                 )
         ;
         return http.build();
