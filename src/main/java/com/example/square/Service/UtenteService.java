@@ -21,7 +21,7 @@ public class UtenteService {
     public boolean registraUtente(Utente utente) {
         // Controlla se l'username esiste già
         if (utenteRepository.findByEmail(utente.getEmail()) != null) {
-            return false; // Username già esistente
+            return false;
         }
 
         // Salva l'utente nel database

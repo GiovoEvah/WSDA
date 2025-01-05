@@ -1,4 +1,4 @@
-package com.example.square.Controller;
+package com.example.square.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class SecurityController {
+public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -19,24 +19,25 @@ public class SecurityController {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable) // Disabilita protezione CSRF
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/styles/**",   // File di stile (CSS)
-                                "/img/**",      // File immagine
-                                "/",            // Endpoint di login
-                                "/postspage",   // Postspage
-                                "/register", // Endpoint di registrazione
-                                "/registerForm",// Form di registrazione
-                                "/loginForm"    // Form di login
-                        ).permitAll() // Consenti accesso pubblico
-                        .anyRequest().authenticated() // Altri endpoint richiedono autenticazione
+                                "/styles/**",
+                                "/img/**",
+                                "/",
+                                "/register",
+                                "/registerForm",
+                                "/loginForm"
+                        ).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
-                        .loginPage("/") // Specifica il tuo endpoint personalizzato
-                        .loginProcessingUrl("/loginForm") // URL per processare il form
-                        .defaultSuccessUrl("/postspage", true) // Reindirizza dopo un login riuscito
-                        .failureUrl("/login?error=true") // Reindirizza in caso di errore
+                        .loginPage("/")
+                        .loginProcessingUrl("/loginForm")
+                        .usernameParameter("email") // Campo per l'username
+                        .passwordParameter("password") // Campo per la password
+                        .defaultSuccessUrl("/postspage", true)
+                        .failureUrl("/error")
                         .permitAll()
                 ).logout(logout -> logout
                         .logoutUrl("/logout")
