@@ -164,6 +164,8 @@ button:disabled {
 
 #postDetailsModal .modal-content #postDetailsContent {
     font-weight: bold; /* Rendere il contenuto del post più in grassetto */
+    font-size: x-large;
+    text-align: center;
 }
 
 #postCommentsList li {
