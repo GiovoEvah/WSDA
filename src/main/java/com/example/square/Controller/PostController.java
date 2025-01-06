@@ -55,10 +55,10 @@ public class PostController {
     public String createPost(@RequestParam String emailUtente, @RequestParam String postContent) {
         try {
             postService.savePost(emailUtente, postContent);
-            return "redirect:/";
+            return "redirect:/postspage";
         } catch (Exception e) {
             System.out.println(e + "Error creating post");
-            return "redirect:/";
+            return "redirect:/error";
         }
     }
 }

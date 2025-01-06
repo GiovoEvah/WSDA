@@ -19,9 +19,9 @@ public class CommentoController {
     public String createComment(@RequestParam String emailUtenteCommento, @RequestParam int postId, @RequestParam String newComment) {
         try {
             commentoService.addCommento(emailUtenteCommento, postId, newComment);
-            return "redirect:/";
+            return "redirect:/postspage";
         } catch (Exception e) {
-            return "redirect:/";
+            return "redirect:/error";
         }
     }
 
