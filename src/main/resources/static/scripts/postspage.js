@@ -22,11 +22,15 @@ function loadPosts() {
         .catch(error => console.error("Errore nel caricamento del file XML:", error));
 }
 
-function displayPosts(xmlDoc) {
+function displayPosts(xmlDoc, startIndex = 0, count = 4) {
     const postContainer = document.getElementById("postContainer");
     const posts = xmlDoc.getElementsByTagName("post");
 
-    for (let post of posts) {
+    // Limita i post da mostrare
+    const endIndex = Math.min(startIndex + count, posts.length);
+
+    for (let i = startIndex; i < endIndex; i++) {
+        const post = posts[i];
         const id = post.getElementsByTagName("id")[0].textContent;
         const autoreEmail = post.getElementsByTagName("email")[0].textContent;
         const dataOra = post.getElementsByTagName("creatoIl")[0].textContent;
@@ -57,6 +61,50 @@ function displayPosts(xmlDoc) {
         postContainer.appendChild(postElement); // Aggiungi il post al container
     }
 }
+
+let currentIndex = 0; // Indice iniziale
+const postsPerPage = 4; // Numero di post da caricare per volta
+let globalXmlDoc = null; // Variabile globale per memorizzare il documento XML
+
+// Funzione per caricare il file XML e memorizzarlo globalmente
+function loadAndCacheXmlDocument() {
+    return fetch('/export/xml')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Errore nel caricamento del file XML");
+            }
+            return response.text();
+        })
+        .then(data => {
+            globalXmlDoc = new window.DOMParser().parseFromString(data, "text/xml");
+            displayPosts(globalXmlDoc, currentIndex, postsPerPage); // Mostra i primi post
+            currentIndex += postsPerPage;
+        })
+        .catch(error => console.error("Errore durante il caricamento del documento XML:", error));
+}
+
+// Listener per il pulsante "Carica altri post"
+document.getElementById("loadMoreButton").addEventListener("click", () => {
+    if (globalXmlDoc) {
+        displayPosts(globalXmlDoc, currentIndex, postsPerPage); // Mostra i prossimi post
+        currentIndex += postsPerPage;
+
+        // Nascondi il pulsante se non ci sono più post da caricare
+        const posts = globalXmlDoc.getElementsByTagName("post");
+        if (currentIndex >= posts.length) {
+            document.getElementById("loadMoreButton").style.display = "none";
+        }
+    } else {
+        console.error("Il documento XML non è stato caricato correttamente.");
+    }
+});
+
+// Carica il documento XML all'avvio della pagina
+document.addEventListener("DOMContentLoaded", () => {
+    loadAndCacheXmlDocument();
+});
+
+
 
 
 function redirectToPostPage(post) {
