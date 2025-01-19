@@ -24,9 +24,13 @@ function loadPosts() {
 
 function displayPosts(xmlDoc, startIndex = 0, count = 4) {
     const postContainer = document.getElementById("postContainer");
-    const posts = xmlDoc.getElementsByTagName("post");
 
-    // Limita i post da mostrare
+    // Pulisci il contenitore dei post prima di aggiungere nuovi post
+    if (startIndex === 0) {
+        postContainer.innerHTML = "";
+    }
+
+    const posts = xmlDoc.getElementsByTagName("post");
     const endIndex = Math.min(startIndex + count, posts.length);
 
     for (let i = startIndex; i < endIndex; i++) {
@@ -36,7 +40,6 @@ function displayPosts(xmlDoc, startIndex = 0, count = 4) {
         const dataOra = post.getElementsByTagName("creatoIl")[0].textContent;
         const testo = post.getElementsByTagName("contenuto")[0].textContent;
 
-        const autore = `${autoreEmail}`;
         const timeAgo = calculateTimeAgo(dataOra);
 
         const postElement = document.createElement("li");
@@ -45,22 +48,21 @@ function displayPosts(xmlDoc, startIndex = 0, count = 4) {
         postElement.innerHTML = `
             <div class="post-header">
                 <textarea id="id_post_${id}" hidden="true">${id}</textarea>
-                <h3>${autore}</h3>
-                <!--<span class="time">${timeAgo}</span>-->
+                <h3>${autoreEmail}</h3>
             </div>
             <p>${testo}</p>
             <button id="view-button_${id}" class="view-button">Visualizza</button>
         `;
 
-        // Aggiungi evento click al pulsante "Visualizza"
         const viewButton = postElement.querySelector(".view-button");
         viewButton.addEventListener("click", () => {
-            redirectToPostPage(post); // Passa il post corrente come argomento
+            redirectToPostPage(post);
         });
 
-        postContainer.appendChild(postElement); // Aggiungi il post al container
+        postContainer.appendChild(postElement);
     }
 }
+
 
 let currentIndex = 0; // Indice iniziale
 const postsPerPage = 4; // Numero di post da caricare per volta
@@ -217,7 +219,7 @@ function setupModalEvents() {
 
 function loadMoreComments(offsetToApply, currentPostId){
     fetch(`/getPaged?postId=${currentPostId}&offset=${offsetToApply}`)
-.then(response => response.json())
+        .then(response => response.json())
         .then(newComments => {
             const modalComments = document.getElementById('postCommentsList');
             if (newComments.length > 0) {
